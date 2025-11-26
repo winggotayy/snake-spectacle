@@ -11,7 +11,7 @@ describe('aiPlayer', () => {
         direction: 'UP' as Direction,
         mode: 'walls' as const,
       };
-      
+
       const move = getAINextMove(state);
       expect(move).toBe('UP'); // Food is above
     });
@@ -23,7 +23,7 @@ describe('aiPlayer', () => {
         direction: 'RIGHT' as Direction,
         mode: 'walls' as const,
       };
-      
+
       const move = getAINextMove(state);
       expect(move).not.toBe('LEFT'); // Would hit wall
     });
@@ -34,12 +34,13 @@ describe('aiPlayer', () => {
           { x: 5, y: 5 },
           { x: 4, y: 5 },
           { x: 4, y: 6 },
+          { x: 5, y: 6 }, // Add segment below head
         ],
         food: { x: 10, y: 10 },
         direction: 'RIGHT' as Direction,
         mode: 'walls' as const,
       };
-      
+
       const move = getAINextMove(state);
       expect(move).not.toBe('DOWN'); // Would collide with body
     });
@@ -54,7 +55,7 @@ describe('aiPlayer', () => {
         direction: 'RIGHT' as Direction,
         mode: 'walls' as const,
       };
-      
+
       const move = getAINextMove(state);
       expect(move).not.toBe('LEFT'); // Can't reverse
     });
@@ -66,7 +67,7 @@ describe('aiPlayer', () => {
         direction: 'LEFT' as Direction,
         mode: 'passthrough' as const,
       };
-      
+
       const move = getAINextMove(state);
       // In passthrough mode, going left would wrap around and be closer
       expect(['LEFT', 'UP', 'DOWN']).toContain(move);

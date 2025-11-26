@@ -67,13 +67,13 @@ describe('gameLogic', () => {
 
     it('should wrap around in passthrough mode', () => {
       const head = { x: 0, y: 0 };
-      expect(getNextHeadPosition(head, 'LEFT', 'passthrough')).toEqual({ 
-        x: GRID_SIZE - 1, 
-        y: 0 
+      expect(getNextHeadPosition(head, 'LEFT', 'passthrough')).toEqual({
+        x: GRID_SIZE - 1,
+        y: 0
       });
-      expect(getNextHeadPosition(head, 'UP', 'passthrough')).toEqual({ 
-        x: 0, 
-        y: GRID_SIZE - 1 
+      expect(getNextHeadPosition(head, 'UP', 'passthrough')).toEqual({
+        x: 0,
+        y: GRID_SIZE - 1
       });
     });
   });
@@ -152,11 +152,11 @@ describe('gameLogic', () => {
           { x: 4, y: 6 },
           { x: 5, y: 6 },
         ],
-        direction: 'DOWN' as const,
+        direction: 'RIGHT' as const,
       };
-      const newState = updateGameState(collisionState, 'RIGHT');
-      const finalState = updateGameState(newState, 'UP');
-      expect(finalState.gameOver).toBe(true);
+      // Moving DOWN from (5,5) hits (5,6) which is part of the body
+      const newState = updateGameState(collisionState, 'DOWN');
+      expect(newState.gameOver).toBe(true);
     });
   });
 });
